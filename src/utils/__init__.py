@@ -1,0 +1,1 @@
+from .model_predict import model_predict_from_input
