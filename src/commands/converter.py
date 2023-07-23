@@ -1,7 +1,7 @@
-import nbformat
-
-from nbconvert import PythonExporter
 from pathlib import Path
+
+import nbformat
+from nbconvert import PythonExporter
 
 from src.config.settings import BASE_DIR
 
@@ -18,7 +18,7 @@ def convert_ipynb_to_py(notebook_path: str, output_path: str) -> None:
         str(BASE_DIR / "algo" / "data" / "F1_training.csv"),
     )
     source_code = source_code.replace(
-        "model.pickle", str(BASE_DIR / "algo" / "model.pickle")
+        "model.pickle", str(BASE_DIR / "algo" / "model.pickle"),
     )
     with Path.open(output_path, "w") as py_file:
         py_file.write(source_code)

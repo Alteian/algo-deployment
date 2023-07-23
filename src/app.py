@@ -1,12 +1,13 @@
 from typing import Union
+
 from starlette.applications import Starlette
 from starlette.requests import Request
 from starlette.responses import Response
 from starlette.websockets import WebSocket
 from strawberry.asgi import GraphQL
 
-from src.graphql import schema
 from src.context import CustomContext
+from src.graphql import schema
 
 
 class CustomGraphQL(GraphQL):

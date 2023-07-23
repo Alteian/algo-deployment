@@ -1,12 +1,12 @@
-import typing
-import pandas as pd
 import pickle
-
+import typing
 from pathlib import Path
+
+import pandas as pd
 
 
 def model_predict_from_input(
-    model: str, query_input: typing.Dict[str, typing.Dict[str, float]]
+    model: str, query_input: typing.Dict[str, typing.Dict[str, float]],
 ) -> typing.Dict[str, float]:
     with Path.open(model, "rb") as f:
         model = pickle.load(f)
@@ -19,11 +19,11 @@ def model_predict_from_input(
         input_data["Pole_Positions"] / input_data["Race_Entries"]
     )
     input_data = input_data.drop(
-        columns=["Race_Wins", "Race_Entries", "Pole_Positions"]
+        columns=["Race_Wins", "Race_Entries", "Pole_Positions"],
     )
     return {
         driver: float(champion)
         for driver, champion in zip(
-            input_data.index, model.predict(input_data)
+            input_data.index, model.predict(input_data),
         )
     }

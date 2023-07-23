@@ -1,8 +1,9 @@
+from functools import cached_property
 from typing import Union
+
 from starlette.requests import Request
 from starlette.responses import Response
 from starlette.websockets import WebSocket
-from functools import cached_property
 
 
 class CustomContext:

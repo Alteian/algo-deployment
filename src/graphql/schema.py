@@ -1,10 +1,7 @@
 from strawberry import Schema
-
-
-from .queries import PredictionQuery
-
 from strawberry.extensions import QueryDepthLimiter, ValidationCache
 
+from .queries import PredictionQuery
 
 schema = Schema(
     query=PredictionQuery,

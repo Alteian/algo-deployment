@@ -46,7 +46,7 @@ def make_api_call(
         """
     variables = {"input": input_data}
     response = httpx.post(
-        api_endpoint, json={"query": query, "variables": variables}
+        api_endpoint, json={"query": query, "variables": variables},
     )
     if response.status_code == STATUS_CODE_OK:
         data = response.json()

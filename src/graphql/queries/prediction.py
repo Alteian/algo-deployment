@@ -1,13 +1,13 @@
-import strawberry
-import typing
 import textwrap
-
+import typing
 from pathlib import Path
+
+import strawberry
 from strawberry.scalars import JSON
 from strawberry.types import Info
 
-from src.utils import model_predict_from_input
 from src.config.settings import BASE_DIR
+from src.utils import model_predict_from_input
 
 
 @strawberry.type
@@ -35,19 +35,20 @@ class PredictionQuery:
     async def predict_champions(self, info: Info, input: JSON) -> JSON:
         try:
             ret_val: typing.Dict[str, float] = model_predict_from_input(
-                info.context.model, input
+                info.context.model, input,
             )
-        except Exception as err: # noqa: BLE001
-            raise Exception(str(err)) from err # noqa: TRY002
+        except Exception as err:  # noqa: BLE001
+            raise Exception(str(err)) from err  # noqa: TRY002
         else:
             return ret_val
+
     @strawberry.field
     async def api_call_showcase(
         self,
         info: Info,
     ) -> str:
         with Path.open(
-            BASE_DIR / "graphql" / "programmatic" / "api_call.py", "r"
+            BASE_DIR / "graphql" / "programmatic" / "api_call.py", "r",
         ) as f:
             api_call_source = f.read()
         return textwrap.dedent(api_call_source)
