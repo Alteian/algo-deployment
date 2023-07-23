@@ -11,7 +11,7 @@ from src.context import CustomContext
 
 class CustomGraphQL(GraphQL):
     async def get_context(
-        self, 
+        self,
         request: Union[Request, WebSocket],
         response: Response,
     ) -> CustomContext:

@@ -2,7 +2,8 @@ import pickle
 import pandas as pd
 
 import os
-model_file = os.path.join('src', 'algo', 'model.pickle')
+
+model_file = os.path.join("src", "algo", "model.pickle")
 
 with open(model_file, "rb") as f:
     model = pickle.load(f)
@@ -55,11 +56,18 @@ sample_data = pd.DataFrame(
     }
 )
 input_data = sample_data.T
-input_data.loc[:, 'Races_to_Wins'] = input_data['Race_Wins'] / input_data['Race_Entries']
-input_data.loc[:, 'Races_to_Poles']  = input_data['Pole_Positions'] / input_data['Race_Entries']
-input_data = input_data.drop(columns=['Race_Wins', 'Race_Entries', 'Pole_Positions'])
+input_data.loc[:, "Races_to_Wins"] = (
+    input_data["Race_Wins"] / input_data["Race_Entries"]
+)
+input_data.loc[:, "Races_to_Poles"] = (
+    input_data["Pole_Positions"] / input_data["Race_Entries"]
+)
+input_data = input_data.drop(
+    columns=["Race_Wins", "Race_Entries", "Pole_Positions"]
+)
 
 print(f"Input data shape: {input_data.shape}")
 print(
-    f"Predictions: {[f'{driver}: {champion}' for driver, champion in zip(input_data.index, model.predict(input_data))]}"
+    "Predictions:"
+    f" {[f'{driver}: {champion}' for driver, champion in zip(input_data.index, model.predict(input_data))]}"
 )

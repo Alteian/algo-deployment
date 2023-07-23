@@ -13,8 +13,10 @@ class CustomContext:
     ) -> None:
         self.request = request
         self.response = response
+
     request: Union[Request, WebSocket]
     response: Response
+
     @cached_property
     def model(self):
         return "src/algo/model.pickle"
