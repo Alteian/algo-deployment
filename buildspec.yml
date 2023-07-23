@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Retrieve an authentication token and authenticate your Docker client to your registry
+      - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 288451795518.dkr.ecr.eu-west-1.amazonaws.com
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t algo-deployment -f docker/Dockerfile . --pull
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker tag algo-deployment:latest 288451795518.dkr.ecr.eu-west-1.amazonaws.com/algo-deployment:latest
+      - docker push 288451795518.dkr.ecr.eu-west-1.amazonaws.com/algo-deployment:latest
+
+artifacts: 
+  files:
+    - Dockerrun.aws.json
+    #- .ebextensions/**/*

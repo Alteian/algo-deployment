@@ -4,7 +4,6 @@ from starlette.requests import Request
 from starlette.responses import Response
 from starlette.websockets import WebSocket
 from strawberry.asgi import GraphQL
-from functools import cached_property
 
 from src.graphql import schema
 from src.context import CustomContext
